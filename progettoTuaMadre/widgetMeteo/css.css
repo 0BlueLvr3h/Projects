@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.container {
+    position: relative;
+    width: 400px;
+    height: 105px;
+    border: 1px black solid;
+    background-color: white;
+    padding: 28px 32px;
+    overflow: hidden;
+    border-radius: 18px;
+    transition: 0.6s ease-out;
+}
+
+body {
+    height: 100vh;
+    background-color: #062830;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.position {
+    height: 20px;
+    width: 35px;
+}
+
+.search-box {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-box input {
+    color: black;
+    width: 80%;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding-left: 32px;
+}
+
+.search-box input::placeholder {
+    font-size: 20px;
+    font-weight: 500;
+    color: #062830;
+    text-transform: capitalize;
+}
+
+.search-box button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    color: #06283D;
+    background-color: #dff6ff;
+    border-radius: 50%;
+    font-size: 22px;
+    transition: 0.4s ease;
+}
+
+.search-box button:hover {
+    color: #fff;
+    background: #138994;
+}
+
+.search-box i {
+    position: absolute;
+    color: #06283D;
+    font-size: 26px;
+}
+
+.icon {
+    height: 15px;
+    width: 18px;
+}
+
+.weather-box {
+    text-align: center;
+}
+
+.weather-box img {
+    width: 45%;
+    margin-top: 30px;
+    scale: 0;
+    opacity: 0;
+}
+
+.weather-box .temperatura {
+    position: relative;
+    color: #06283D;
+    font-size: 4rem;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-left: -16px;
+}
+
+.weather-box .temperatura span {
+    position: absolute;
+    margin-left: 4px;
+    font-size: 1.5rem;
+}
+
+.weather-box .descrizione {
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.widget-body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.widget-body .humidity,
+.widget-body .wind {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100px;
+}
+
+.widget-body .humidity {
+    padding-left: 20px;
+    justify-content: flex-start;
+}
+
+.widget-body .wind {
+    padding-left: 20px;
+    justify-content: flex-end;
+}
+
+.widget-body i {
+    color: #06283D;
+    font-size: 26px;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+
+.widget-body span {
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.widget-body p {
+    color: #06283D;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.weather-box,
+.widget-body {
+    scale: 0;
+    opacity: 0;
+}
+
+.fadeIn {
+    animation: 0.5s fadeIn forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
