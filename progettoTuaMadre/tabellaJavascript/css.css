@@ -1,0 +1,8 @@
+div{
+    margin: auto;
+    width: 50%;
+    border: 3px solid black;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
