@@ -21,3 +21,6 @@ th, td {
 
   }
   
+input[type=submit]:disabled{
+    display: none;
+}

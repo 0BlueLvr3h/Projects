@@ -1,11 +1,32 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
+    var isColsNot0 = true;
+    var isRowNot0 = true;
+
+    document.getElementById("cols").addEventListener("change",()=>{
+        if(document.getElementById("cols").value==0){
+            !isColsNot0;
+            document.getElementById("submit").setAttribute("disabled","");
+        }else{
+            document.getElementById("submit").removeAttribute("disabled");
+        }
+    })
+
+    document.getElementById("rows").addEventListener("change",()=>{
+        if(document.getElementById("rows").value==0){
+            !isRowNot0;
+            document.getElementById("submit").setAttribute("disabled","");
+        }else{
+            document.getElementById("submit").removeAttribute("disabled");
+        }
+    })
+
 
     document.getElementById("submit").addEventListener("click",()=>{
         var cols = document.getElementById("cols").value;
         var rows = document.getElementById("rows").value;
 
-        if(cols > 0 && rows >0){
+        if(isColsNot0 && isRowNot0){
             createTable(cols,rows);
         }
 
@@ -42,7 +63,6 @@ document.addEventListener("DOMContentLoaded",()=>{
             }
     
             newTable.appendChild(table);
-            //table.setAttribute("border","1");
             table.style.margin = "auto";
             table.style.textAlign = "center";
             table.style.border = "1px solid black"
