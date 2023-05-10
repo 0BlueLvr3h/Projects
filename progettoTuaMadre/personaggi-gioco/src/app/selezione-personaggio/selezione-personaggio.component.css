@@ -1,0 +1,80 @@
+*{
+    background-color: rgb(145, 145, 145);
+}
+
+img{
+    height: 110px;
+    width: 100px;
+}
+
+input{
+    text-align: center;
+    font-weight: bold;
+}
+
+.contains-not-buttons{
+    margin-top: 220px;
+}
+
+.container-card {
+    position: relative; 
+}
+
+.button-container {
+    width: 450px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.button-item {
+    flex-basis: calc(33.33% - 10px);
+    margin: 5px;
+}
+
+
+.contains-all {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+.character-name {
+    margin-top: 50px;
+}
+
+.atk, .def {
+    display: flex;
+    align-items: center;
+}
+
+.atk p {
+    margin: 0;
+    line-height: 12px;
+}
+
+.def p{
+    margin: 0;
+    line-height: 12px;
+}
+
+.statImg {
+    height: 25px;
+    width: 25px;
+    margin-right: 10px;
+}
+
+.progress {
+    flex: 1;
+    height: 12px;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.character-text-description{
+    text-align: center;
+}
+  
+
