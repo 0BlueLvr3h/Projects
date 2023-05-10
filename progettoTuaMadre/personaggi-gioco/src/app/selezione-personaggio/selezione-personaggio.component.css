@@ -13,25 +13,42 @@ input{
 }
 
 .contains-not-buttons{
-    margin-top: 220px;
+    margin-top: 190px;
 }
 
 .container-card {
     position: relative; 
+    width: 500px;
+    margin-left: 500px;
 }
 
-.button-container {
+.character-container{
+    margin-top: 15px;
     width: 450px;
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
+    text-align: center;
+    height: 250px;
+}
+
+.img-container {
+    margin-top: 15px;
+    width: 450px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
 }
 
 
-.button-item {
+.img-item {
     flex-basis: calc(33.33% - 10px);
     margin: 5px;
+    border: 1px solid black;
+    height: 100px;
 }
 
 
@@ -43,6 +60,10 @@ input{
   
 .character-name {
     margin-top: 50px;
+}
+
+.character-name input {
+    width: 300px;
 }
 
 .atk, .def {
@@ -73,8 +94,34 @@ input{
     overflow: hidden;
 }
 
+.arrow-text{
+    margin-left: 18.5%;
+    align-items: center;
+    text-align: center;
+}
+
+.arrow-text p {
+    font-weight: bold;
+}
+
 .character-text-description{
     text-align: center;
+}
+
+.character-image{
+    margin-top: 10px; 
+    display: flex;
+    justify-content: center;
+}
+
+.character-image img{
+    margin-top: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    height: 200px;
+    border: 2px solid black;
 }
   
 

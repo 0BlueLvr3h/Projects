@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SelezionePersonaggioComponent } from './selezione-personaggio/selezione-personaggio.component';
 import { CardCombattimentoComponent } from './card-combattimento/card-combattimento.component';
+import { CharacterSelectedComponent } from './character-selected/character-selected.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SelezionePersonaggioComponent,
-    CardCombattimentoComponent
+    CardCombattimentoComponent,
+    CharacterSelectedComponent
   ],
   imports: [
     BrowserModule,

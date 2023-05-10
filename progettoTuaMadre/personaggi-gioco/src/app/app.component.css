@@ -1,12 +1,17 @@
-
-
-
-body{
-    background-color: gray;
+app-selezione-personaggio{
+    margin-top: 100px;
 }
 
+.text{
+    display: flex; 
+    justify-content: center !important;
+}
 
-p{
+.sceltaPersonaggi{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    padding-left: 26px;
 }
+
+
