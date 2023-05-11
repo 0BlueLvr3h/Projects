@@ -116,6 +116,8 @@ export class SelezionePersonaggioComponent implements OnInit{
     if(!this.toggled){
       this.name = "";
       this.descrizione = "Seleziona personaggio";
+      this.atk = 0;
+      this.def = 0;
     }
   }
 
