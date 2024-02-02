@@ -1,7 +1,7 @@
 
-function collisionDetector(x,y,allNodes){
-    allNodes.forEach(function(node,i){
-        
+function collisionDetector(x, y, allNodes) {
+    allNodes.forEach(function (node, i) {
+
     })
 }
 
@@ -32,7 +32,7 @@ function isOverlapY(y, nodes) {
 }
 
 
-function drawStrokes(nodesToConnect,ctx,homeNode) {
+function drawStrokes(nodesToConnect, ctx, homeNode) {
 
     ctx.beginPath();
     ctx.strokeStyle = "red";
@@ -73,7 +73,7 @@ function drawStrokes(nodesToConnect,ctx,homeNode) {
 
 
 
-function writeNodes(nodePath,nodeCoordPair,elem,ctx,homeNode) {
+function writeNodes(nodePath, nodeCoordPair, elem, ctx, homeNode) {
     document.getElementById("nodes").innerHTML = "";
 
     nodePath.forEach(function (node, i) {
@@ -81,8 +81,8 @@ function writeNodes(nodePath,nodeCoordPair,elem,ctx,homeNode) {
 
         var biggerNode = document.createElement("div");
         biggerNode.className = "biggerDots";
-        biggerNode.style.top = (node.x-10) + "px";
-        biggerNode.style.left = (node.y-10) + "px";
+        biggerNode.style.top = (node.x - 10) + "px";
+        biggerNode.style.left = (node.y - 10) + "px";
         document.getElementById("nodes").appendChild(biggerNode);
 
 
@@ -105,7 +105,7 @@ function writeNodes(nodePath,nodeCoordPair,elem,ctx,homeNode) {
         }
 
         nodeToAdd.style.zIndex = 3;
-        drawStrokes(nodeCoordPair,ctx,homeNode);
+        drawStrokes(nodeCoordPair, ctx, homeNode);
         document.getElementById("nodes").appendChild(nodeToAdd);
     });
 }
