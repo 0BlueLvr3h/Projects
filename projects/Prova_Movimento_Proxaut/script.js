@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+  var text = '{"firstName":"John", "lastName": "Doe", "email":"john@gmail.com","favoriteSubjects":["Computer Science", "History"]}';
+  getRequest();
+  postRequest(text);
+
   const exampleOrder = {
     orderId: crypto.randomUUID,
     orderUpdateId: 0,
