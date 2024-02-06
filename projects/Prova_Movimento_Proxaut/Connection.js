@@ -1,9 +1,14 @@
-const url = "http://localhost:8080/api/v1/student";
-function getRequest() {
+const url = "http://localhost:8080/api/v1/order";
+
+function getRequestOrder() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(xhttp.response);
+            try{
+                var response = JSON.parse(xhttp.response);
+            }catch(err){
+                console.log(err);
+            }
             console.log(response);
         }
     };
@@ -11,14 +16,13 @@ function getRequest() {
     xhttp.send();
 }
 
-function postRequest(jsonString){
+function postRequestOrder(jsonString){
     var obj = JSON.parse(jsonString)
     console.log(typeof obj);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            var response = JSON.parse(xhttp.response);
-            console.log(response);
+            console.log(xhttp.response);
         }
     };
     
@@ -26,4 +30,30 @@ function postRequest(jsonString){
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(obj));
 
+}
+
+function putRequestOrder(newOrder,oldOrderId){
+    var obj = JSON.parse(newOrder);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log(xhttp.response);
+        }
+    };
+    
+    xhttp.open("PUT", url+"/"+oldOrderId, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(obj));
+}
+
+function deleteRequestOrder(orderId){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log(xhttp.response);
+        }
+    };
+    
+    xhttp.open("DELETE", url+"/"+orderId, true);
+    xhttp.send();
 }
