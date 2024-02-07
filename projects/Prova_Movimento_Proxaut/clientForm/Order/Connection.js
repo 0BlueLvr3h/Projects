@@ -41,7 +41,7 @@ function putRequestOrder(newOrder,oldOrderId){
         }
     };
     
-    xhttp.open("PUT", url+"/"+oldOrderId, true);
+    xhttp.open("PUT", url+"/"+  oldOrderId, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(obj));
 }

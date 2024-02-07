@@ -2,12 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const exampleOrder = '{"orderUpdateId":2,"nodes":[{"nodeId":"productionunit_1","sequenceId":1,"released":true,"nodePosition":{"x":0,"y":0,"mapId":"local"},"actions":[{"actionId":"a001","actionType":"pick","blockingType":"BlockingType.HARD","actionParameters":[{"key":"stationType","value":"floor"},{"key":"loadType","value":"EPAL"}]}]},{"nodeId":"productionunit_2","sequenceId":2,"released":true,"nodePosition":{"x":100,"y":200,"mapId":"local"},"actions":[{"actionId":"a002","actionType":"drop","blockingType":"BlockingType.HARD","actionParameters":[{"key":"stationType","value":"floor"},{"key":"loadType","value":"EPAL"}]}]}],"edges":[{"edgeId":"productionunit_1_2","sequenceId":1,"startNodeId":"productionunit_1","endNodeId":"productionunit_2","released":true,"actions":[]}]}';
 const secondOrder = '{"orderUpdateId":3,"nodes":[{"nodeId":"productionunit_1","sequenceId":1,"released":false,"nodePosition":{"x":0,"y":0,"mapId":"local"},"actions":[{"actionId":"a001","actionType":"pick","blockingType":"BlockingType.HARD","actionParameters":[{"key":"stationType","value":"floor"},{"key":"loadType","value":"EPAL"}]}]},{"nodeId":"productionunit_2","sequenceId":2,"released":true,"nodePosition":{"x":100,"y":200,"mapId":"local"},"actions":[{"actionId":"a002","actionType":"drop","blockingType":"BlockingType.HARD","actionParameters":[{"key":"stationType","value":"floor"},{"key":"loadType","value":"EPAL"}]}]}],"edges":[{"edgeId":"productionunit_1_2","sequenceId":1,"startNodeId":"productionunit_1","endNodeId":"productionunit_2","released":true,"actions":[]}]}';
-  
-
-postRequestOrder(exampleOrder);
-getRequestOrder();
-putRequestOrder(secondOrder,"65c22f8b45c4883095d90f96")
-deleteRequestOrder("65c22f8b45c4883095d90f96");
 
 
 const c = document.getElementById("canvas");
