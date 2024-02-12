@@ -6,7 +6,6 @@
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <script src="./form.js"></script>
@@ -42,18 +41,18 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title">Order Information</h2>
-                                        <input type="number" name="orderUpdateId" placeholder="OrderUpdateId" />
+                                        <input type="number" id="orderUpdateId" placeholder="OrderUpdateId" />
                                     </div>
-                                    <input type="button" name="next" class="next action-button" value="Next Step" />
+                                    <input type="button" id="orderIdButton" class="next action-button" value="Next Step" />
                                 </fieldset>
                                 <!--///////////////////////////NODES FORM/////////////////////////////-->
                                 <fieldset>
-                                    <div class="form-card">
+                                    <div class="form-card" id="nodes">
                                         <h2 class="fs-title">Insert Nodes</h2>
                                         <div class="radio-group">
                                         </div>
                                         <label class="pay">Node Id</label>
-                                        <input type="text" id="idNode" placeholder="" />
+                                        <input type="text" id="idNode" placeholder=""/>
 
                                         <div class="row">
                                             <div class="col-9">
@@ -62,7 +61,7 @@
                                             </div>
                                             <div class="col-3">
                                                 <label class="pay">Released</label>
-                                                <select class="form-select" name="released" id="released">
+                                                <select class="form-select"id="released">
                                                     <option value="true">True</option>
                                                     <option value="false">False</option>
                                                 </select>
@@ -77,27 +76,32 @@
 
                                             <div class="col-9">
                                                 CoordX
-                                                <input type="number" class="list-dt" id="nodePositionX"
-                                                    name="nodePositionX"></input>
+                                                <input type="number" class="list-dt" id="nodePositionX"></input>
                                                 CoordY
-                                                <input type="number" class="list-dt" id="nodePositionY"
-                                                    name="nodePositionY"></input>
+                                                <input type="number" class="list-dt" id="nodePositionY"></input>
                                                 MapId
-                                                <input type="text" class="list-dt" id="mapId" name="mapId"></input>
+                                                <input type="text" class="list-dt" id="mapId"></input>
                                             </div>
 
                                         </div>
 
-                                        <div class="form-card">
+                                        <div class="form-card" id="action">
                                             <h2 class="fs-title">Insert Node Actions</h2>
                                             <label class="pay">Action Id</label>
                                             <input type="text" id="actionId" placeholder="" />
                                             <label class="pay">Action Type</label>
                                             <input type="text" id="actionType" placeholder="" />
                                             <label class="pay">Blocking Type</label>
-                                            <input type="text" id="blockingType" placeholder="" />
+                                            <select class="pay" id="blockingType">
+                                                <option value=""></option>
+                                                <option value="NONE">NONE</option>
+                                                <option value="SOFT">SOFT</option>
+                                                <option value="HARD">HARD</option>
+                                            </select>
+                                            <br>
+                                            <br>
 
-                                            <div class="form-card">
+                                            <div class="form-card"  id="action-param">
                                                 <h2 class="fs-title">Insert Node Action Parameters</h2>
                                                 <label class="pay">Key</label>
                                                 <input type="text" id="parameterKey" placeholder="" />
@@ -137,22 +141,22 @@
                                 <!--///////////////////////////EDGE FORM/////////////////////////////-->
 
                                 <fieldset>
-                                    <div class="form-card">
+                                    <div class="form-card" id="edge">
                                         <h2 class="fs-title">Insert Edges</h2>
                                         <div class="radio-group">
                                         </div>
                                         <label class="pay">Edge Id</label>
-                                        <input type="text" name="idEdge" placeholder="" />
+                                        <input type="text" id="edgeId" placeholder="" />
 
 
                                         <div class="row">
                                             <div class="col-9">
                                                 <label class="pay">Sequence Id</label>
-                                                <input type="number" name="idSequenceEdge" placeholder="" />
+                                                <input type="number" id="edgeIdSequence" placeholder="" />
                                             </div>
                                             <div class="col-3">
                                                 <label class="pay">Released</label>
-                                                <select class="form-select" name="releasedEdge" id="releasedEdge">
+                                                <select class="form-select" id="edgeReleased">
                                                     <option value="true">True</option>
                                                     <option value="false">False</option>
                                                 </select>
@@ -166,27 +170,33 @@
                                             </div>
                                             <div class="col-9">
                                                 Start From Node ID
-                                                <input type="text" class="list-dt" id="edgeStart"
-                                                    name="edgeStart"></input>
+                                                <input type="text" class="list-dt" id="edgeStart"></input>
                                                 End To Node ID
-                                                <input type="text" class="list-dt" id="edgeEnd" name="edgeEnd"></input>
+                                                <input type="text" class="list-dt" id="edgeEnd"></input>
                                             </div>
                                         </div>
-                                        <div class="form-card">
+                                        <div class="form-card" id="edgeActionDiv">
                                             <h2 class="fs-title">Insert Edge Actions</h2>
                                             <label class="pay">Action Id</label>
-                                            <input type="text" name="edgeActionId" placeholder="" />
+                                            <input type="text" id="edgeActionId" placeholder="" />
                                             <label class="pay">Action Type</label>
-                                            <input type="text" name="edgeActionType" placeholder="" />
+                                            <input type="text" id="edgeActionType" placeholder="" />
                                             <label class="pay">Blocking Type</label>
-                                            <input type="text" name="edgeBlockingType" placeholder="" />
+                                            <select class="pay" id="edgeBlockingType">
+                                                <option value=""></option>
+                                                <option value="NONE">NONE</option>
+                                                <option value="SOFT">SOFT</option>
+                                                <option value="HARD">HARD</option>
+                                            </select>
+                                            <br>
+                                            <br>
 
-                                            <div class="form-card">
+                                            <div class="form-card" id="edgeActionParameters">
                                                 <h2 class="fs-title">Insert Edge Action Parameters</h2>
                                                 <label class="pay">Key</label>
-                                                <input type="text" name="edgeParameterKey" placeholder="" />
+                                                <input type="text" id="edgeParameterKey" placeholder="" />
                                                 <label class="pay">Value</label>
-                                                <input type="text" name="edgeParameterValue" placeholder="" />
+                                                <input type="text" id="edgeParameterValue" placeholder="" />
 
                                                 <input type="button" class="action-button-previous"
                                                     id="edgeInsertParamValue" value="Insert">
@@ -211,7 +221,7 @@
 
                                     <input type="button" name="previous" class="previous action-button-previous"
                                         value="Previous" />
-                                    <input type="button" name="make_payment" class="next action-button"
+                                    <input type="button" id="makeOrder" class="next action-button"
                                         value="Confirm" />
                                 </fieldset>
 

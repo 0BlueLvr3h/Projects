@@ -1,14 +1,23 @@
 class actionParameter{
     constructor(key,value) {
-        setMap(key,value);
+        this.key = key;
+        this.value = value;
     }
 
-    getMap(){
-        return this.map
+    getKey(){
+        return this.map;
     }
 
-    setMap(key,value){
-        this.map = new Map(key,value);
+    getValue(){
+        return this.value;
+    }
+
+    setKey(key){
+        this.key = key;
+    }
+
+    setValue(value){
+        this.value = value;
     }
 
     
