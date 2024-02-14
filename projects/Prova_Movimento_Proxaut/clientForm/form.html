@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -15,6 +15,7 @@
         <script src="./Order/Nodee.js"></script>
         <script src="./Order/NodePosition.js"></script>
         <script src="./Order/OrderObject.js"></script>
+        <script src="./Order/Connection.js"></script>
 
         <link rel="stylesheet" href="form.css">
     </head>
@@ -41,9 +42,10 @@
                                 <fieldset>
                                     <div class="form-card">
                                         <h2 class="fs-title">Order Information</h2>
-                                        <input type="number" id="orderUpdateId" placeholder="OrderUpdateId" />
+                                        <input type="number" min="1" id="orderUpdateId" placeholder="OrderUpdateId" />
                                     </div>
                                     <input type="button" id="orderIdButton" class="next action-button" value="Next Step" />
+                                    or <a href="./insertByJson.html">insert by json</a>
                                 </fieldset>
                                 <!--///////////////////////////NODES FORM/////////////////////////////-->
                                 <fieldset>
@@ -57,7 +59,7 @@
                                         <div class="row">
                                             <div class="col-9">
                                                 <label class="pay">Sequence Id</label>
-                                                <input type="number" id="idSequence" placeholder="" />
+                                                <input type="number" min="1" id="idSequence" placeholder="" />
                                             </div>
                                             <div class="col-3">
                                                 <label class="pay">Released</label>
@@ -76,9 +78,9 @@
 
                                             <div class="col-9">
                                                 CoordX
-                                                <input type="number" class="list-dt" id="nodePositionX"></input>
+                                                <input type="number" min="1" class="list-dt" id="nodePositionX"></input>
                                                 CoordY
-                                                <input type="number" class="list-dt" id="nodePositionY"></input>
+                                                <input type="number" min="1" class="list-dt" id="nodePositionY"></input>
                                                 MapId
                                                 <input type="text" class="list-dt" id="mapId"></input>
                                             </div>
@@ -152,7 +154,7 @@
                                         <div class="row">
                                             <div class="col-9">
                                                 <label class="pay">Sequence Id</label>
-                                                <input type="number" id="edgeIdSequence" placeholder="" />
+                                                <input type="number" min="1" id="edgeIdSequence" placeholder="" />
                                             </div>
                                             <div class="col-3">
                                                 <label class="pay">Released</label>

@@ -1,6 +1,6 @@
 
 class PathNode {
-    constructor(index, x, y, isHome, isReleased){
+    constructor(index, x, y, isReleased, isHome = false){
         this.index = index;
         this.x = x;
         this.y = y;

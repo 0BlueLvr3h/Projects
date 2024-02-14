@@ -66,10 +66,8 @@ $(document).ready(function () {
     })
 
 
-
     let orderUpdateId;
 
-    document.getElementById("orderIdButton").disabled = true;
 
     document.getElementById("orderUpdateId").addEventListener("change", () => {
         orderUpdateId = document.getElementById("orderUpdateId");
@@ -318,8 +316,8 @@ $(document).ready(function () {
 
     function createOrder(orderUpdateId, nodes, edges) {
         let obj = new orderObject(orderUpdateId.value, nodes, edges);
-        console.log(JSON.stringify(obj));
-        postRequestOrder(obj);
+        console.log(obj);
+        postRequestOrder(JSON.stringify(obj));
         window.location.href = "../page.html";
     }
 
