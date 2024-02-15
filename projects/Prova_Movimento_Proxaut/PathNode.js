@@ -1,6 +1,6 @@
 
 class PathNode {
-    constructor(index, x, y, isReleased, isHome = false){
+    constructor(index, x, y, isReleased, isHome = false) {
         this.index = index;
         this.x = x;
         this.y = y;
@@ -8,33 +8,33 @@ class PathNode {
         this.isReleased = isReleased;
     }
 
-    getNodeX(){
+    getNodeX() {
         return this.x;
     }
-    
-    getNodeY(){
+
+    getNodeY() {
         return this.y;
     }
 
-    isThisNodeHome(){
+    isThisNodeHome() {
         return this.isHome;
     }
 
-    setHome(){
+    setHome() {
         this.isHome = true;
     }
 
-    getIndex(){
+    getIndex() {
         return this.index;
     }
-    
-    setReleased(flag){
+
+    setReleased(flag) {
         this.isReleased = flag;
     }
 
-    isNodeReleased(){
+    isNodeReleased() {
         return this.isReleased;
     }
-    
+
 
 }

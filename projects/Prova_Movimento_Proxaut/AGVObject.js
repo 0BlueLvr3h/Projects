@@ -24,7 +24,6 @@ class AGV {
       const destinationX = final[index].x;
       const destinationY = final[index].y;
 
-      console.log(final[index].x, final[index].y);
       let startX = element.offsetTop;
       let startY = element.offsetLeft;
       const deltaX = destinationX - startX;
@@ -92,7 +91,6 @@ class AGV {
                 document.getElementById("changeButton").disabled = false;
               }
 
-              console.log("arrivato1");
             }
           }
       }, 8);
