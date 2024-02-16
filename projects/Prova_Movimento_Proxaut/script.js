@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             setV(nodes.length);
+            document.getElementById("destinationNode").max = nodes.length;
             generateRandomAdjacentMatrix();
 
 
@@ -100,6 +101,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
+        document.getElementById("delOrder").addEventListener("click",()=>{
+          deleteRequestOrder(document.getElementById("orders").value);
+          location.reload();
+        })
+
+        document.getElementById("updateOrder").addEventListener("click",()=>{
+          document.getElementById("overlay").style.display = "block";
+            
+        })
+
+        document.getElementById("orderButton").addEventListener("click",()=>{
+          if(isJsonString(document.getElementById("textarea").value)){
+            putRequestOrder(document.getElementById("textarea").value,document.getElementById("orders").value);
+            location.reload();
+          }
+          document.getElementById("overlay").style.display = "none";
+        })
 
 
 
@@ -139,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         var finalPath = new Array();
         document.getElementById("animation").addEventListener("click", () => {
-
+          
           finalPath = [];
           var homeNodeIndex;
           nodePath.forEach(function (node, i) {

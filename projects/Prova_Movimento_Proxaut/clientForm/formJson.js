@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isJsonString(document.getElementById("textarea").value)) {
             postRequestOrder(document.getElementById("textarea").value)
                 .then((result) => {
-                    console.log("ciao" + result);
                     document.getElementById("textarea").value = "";
                     window.location.href = "../page.html"
                 }).catch((error) => { console.log(error); });
@@ -12,13 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
-    function isJsonString(str) {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-    }
+
 
 })
