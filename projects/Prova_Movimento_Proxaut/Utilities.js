@@ -76,6 +76,13 @@ function drawStrokes(nodesToConnect, ctx, homeNode) {
 function writeNodes(nodePath, nodeCoordPair, elem, ctx, homeNode) {
     document.getElementById("nodes").innerHTML = "";
 
+
+    //coppie di nodi da connettere
+    console.log(connectedNodes);
+    //coppie di nodi da connettere
+
+
+
     nodePath.forEach(function (node, i) {
         nodeCoordPair.push(node);
 
@@ -105,7 +112,10 @@ function writeNodes(nodePath, nodeCoordPair, elem, ctx, homeNode) {
         }
 
         nodeToAdd.style.zIndex = 3;
+
         drawStrokes(nodeCoordPair, ctx, homeNode);
+
         document.getElementById("nodes").appendChild(nodeToAdd);
+
     });
 }

@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setV(nodes.length);
             document.getElementById("destinationNode").max = nodes.length;
             generateRandomAdjacentMatrix();
+            traceConnectedNodes();
 
 
             let textArea = document.createElement("textarea");
@@ -152,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         });
 
-        console.log(nodePath);
 
 
         var finalPath = new Array();

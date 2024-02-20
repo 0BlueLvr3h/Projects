@@ -24,7 +24,7 @@ function generateRandomAdjacentMatrix() {
             var random_boolean = Math.random() < 0.5;
             if (random_boolean) {
                 matrix[i][j] = matrix[j][i] = Math.floor(Math.random() * 20);
-            }else{
+            } else {
                 matrix[i][j] = matrix[j][i] = 0;
             }
         }
@@ -92,6 +92,8 @@ function dijkstra(src, destinationNode) {
             if (!sptSet[v] && matrix[u][v] != 0 && dist[u] != Number.MAX_VALUE && dist[u] + matrix[u][v] < dist[v]) {
                 dist[v] = dist[u] + matrix[u][v];
                 parent[v] = u;
+            } else {
+                console.log("matrix " + matrix[u][v]);
             }
         }
     }
@@ -100,5 +102,24 @@ function dijkstra(src, destinationNode) {
     finalPath = printSolution(dist, parent, src, destinationNode);
     return finalPath;
 }
+
+var connectedNodes = new Array();
+function traceConnectedNodes() {
+    for (let i = 0; i < V; i++) {
+        for (let j = i + 1; j < V; j++) {
+            if (matrix[i][j] !== 0) {
+                console.log(`I nodi ${i} e ${j} sono collegati con un peso di ${matrix[i][j]}.`);
+                var arrayElement = new Array();
+                arrayElement.push(i);
+                arrayElement.push(j);
+                connectedNodes.push(arrayElement);
+
+            } else {
+                console.log(`I nodi ${i} e ${j} non sono collegati.`);
+            }
+        }
+    }
+}
+
 
 
