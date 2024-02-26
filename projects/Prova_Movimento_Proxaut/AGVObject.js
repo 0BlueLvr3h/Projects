@@ -23,16 +23,15 @@ class AGV {
     function animateNode() {
       const destinationX = final[index].x;
       const destinationY = final[index].y;
-      
+
       let startX = element.offsetTop;
       let startY = element.offsetLeft;
       const deltaX = destinationX - startX;
       const deltaY = destinationY - startY;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-      
+
       document.getElementById("orders").disabled = true;
       document.getElementById("animation").disabled = true;
-      document.getElementById("changeButton").disabled = true;
 
       const step = 1;
       const stepsCount = Math.ceil(distance / step);
@@ -42,61 +41,57 @@ class AGV {
       let stepIndex = 0;
 
       const moveInterval = setInterval(() => {
-          if (stepIndex >= stepsCount) {
-            clearInterval(moveInterval);
+        if (stepIndex >= stepsCount) {
+          clearInterval(moveInterval);
 
+          index++;
+
+          if (index < final.length) {
+            animateNode();
+          }
+
+          if (final[index - 1].x == home.x && final[index - 1].y == home.y) {
+            document.getElementById("orders").disabled = false;
+            document.getElementById("animation").disabled = false;
+          }
+
+          if (final[index] != undefined && final[index] != home) {
+            final[index].setReleased(true);
+          }
+        } else {
+          if (final[index + 1] != undefined) {
+            final[index + 1].setReleased(false);
+          }
+          startX += stepX * acceleration;
+          startY += stepY * acceleration;
+          element.style.top = startX + "px";
+          element.style.left = startY + "px";
+          stepIndex++;
+
+          const remainingDistance = Math.sqrt(
+            (final[index].x - startX) * (final[index].x - startX) +
+            (final[index].y - startY) * (final[index].y - startY)
+          ).toFixed(2);
+
+          if (remainingDistance < step) {
+            clearInterval(moveInterval);
             index++;
 
             if (index < final.length) {
-                animateNode();
+              animateNode();
             }
 
-            if (final[index - 1].x == home.x && final[index - 1].y == home.y) {
-              document.getElementById("orders").disabled = false;
+            if (
+              final[index - 1].x == home.x &&
+              final[index - 1].y == home.y
+            ) {
               document.getElementById("animation").disabled = false;
-              document.getElementById("changeButton").disabled = false;
-              home.setReleased(false);
+              document.getElementById("orders").disabled = false;
             }
-            
-            if (final[index] != undefined && final[index] != home) {
-              final[index].setReleased(true);
-            }
-          } else {
-            if (final[index + 1] != undefined) {
-              final[index + 1].setReleased(false);
-              home.setReleased(true);
-            }
-            startX += stepX * acceleration;
-            startY += stepY * acceleration;
-            element.style.top = startX + "px";
-            element.style.left = startY + "px";
-            stepIndex++;
-            
-            const remainingDistance = Math.sqrt(
-              (final[index].x - startX) * (final[index].x - startX) +
-              (final[index].y - startY) * (final[index].y - startY)
-              ).toFixed(2);
-              
-              if (remainingDistance < step) {
-                clearInterval(moveInterval);
-              index++;
-              
-              if (index < final.length) {
-                animateNode();
-              }
-              
-              if (
-                final[index - 1].x == home.x &&
-                final[index - 1].y == home.y
-                ) {
-                  document.getElementById("animation").disabled = false;
-                  document.getElementById("changeButton").disabled = false;
-                  document.getElementById("orders").disabled = false;
-                }
-                
-              }
+
           }
-        }, 8);
+        }
+      }, 8);
     }
 
     animateNode();

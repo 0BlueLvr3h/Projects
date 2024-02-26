@@ -30,50 +30,32 @@ function isOverlapY(y, nodes) {
 
     return false;
 }
-
-
-function drawStrokes(nodesToConnect, ctx, homeNode) {
-
-    ctx.beginPath();
+function drawStrokes(nodesToConnect, path, ctx) {
+    ctx.clearRect(0, 0, document.getElementById("canvas").width, document.getElementById("canvas").height);
+    var finalNodes;
     ctx.strokeStyle = "red";
 
-    const firstNode = nodesToConnect[0];
-    const startX = homeNode.y + 10;
-    const startY = homeNode.x + 10;
-    const endX = firstNode.y + 10;
-    const endY = firstNode.x + 10;
-    ctx.moveTo(startX, startY);
-    ctx.lineTo(endX, endY);
+    finalNodes = nodesToConnect.map(nodesArray =>
+        nodesArray.map(nodeIndex => path.find(node => node.index=== nodeIndex))
+    );
 
-    let prevNode = firstNode;
-    for (let i = 1; i < nodesToConnect.length; i++) {
-        const currentNode = nodesToConnect[i];
-        const startX = prevNode.y + 10;
-        const startY = prevNode.x + 10;
-        const endX = currentNode.y + 10;
-        const endY = currentNode.x + 10;
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
-        prevNode = currentNode;
-    }
-
-    const lastNode = nodesToConnect[nodesToConnect.length - 1];
-    for (let i = 0; i < nodesToConnect.length - 1; i++) {
-        const otherNode = nodesToConnect[i];
-        const startX = lastNode.y + 10;
-        const startY = lastNode.x + 10;
-        const endX = otherNode.y + 10;
-        const endY = otherNode.x + 10;
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
-    }
-
-    ctx.stroke();
+    finalNodes.forEach(nodesArray => {
+        nodesArray.reduce((prevNode, currentNode) => {
+            ctx.beginPath();
+            if (prevNode && currentNode) {
+                ctx.moveTo(prevNode.y + 10, prevNode.x + 10);
+                ctx.lineTo(currentNode.y + 10, currentNode.x + 10);
+                ctx.stroke();
+            }
+        });
+    });
+    ctx.closePath();
 }
 
 
 
-function writeNodes(nodePath, nodeCoordPair, elem, ctx, homeNode) {
+function writeNodes(nodePath, nodeCoordPair, elem, ctx) {
+
     document.getElementById("nodes").innerHTML = "";
 
 
@@ -81,6 +63,7 @@ function writeNodes(nodePath, nodeCoordPair, elem, ctx, homeNode) {
     console.log(connectedNodes);
     //coppie di nodi da connettere
 
+    console.log("nodePath ", nodePath);
 
 
     nodePath.forEach(function (node, i) {
@@ -108,14 +91,14 @@ function writeNodes(nodePath, nodeCoordPair, elem, ctx, homeNode) {
                 document.getElementById("start").appendChild(startNode);
             }
         } else {
-            nodeToAdd.innerHTML = i;
+            nodeToAdd.innerHTML = i + 1;
         }
 
         nodeToAdd.style.zIndex = 3;
-
-        drawStrokes(nodeCoordPair, ctx, homeNode);
-
         document.getElementById("nodes").appendChild(nodeToAdd);
-
+        
     });
+    drawStrokes(connectedNodes, nodePath, ctx);
+    connectedNodes = [];
+    
 }

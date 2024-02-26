@@ -26,6 +26,8 @@
 
 <select id="orders" style="text-align: center;">
     <option value="">Select Order</option>
+    <option value="Manual Mode">Manual Mode</option>
+
 </select>
 <input type="button" id="delOrder" value="Delete Order">
 <input type="button" id="updateOrder" value="Update Order">
@@ -59,9 +61,9 @@
 </div>
 
 <p><button id="animation">Calculate</button></p> 
-<p><button id="changeButton">Change Nodes Position</button></p> 
+<div id="coords"></div>
 
-<div class="container">
+<div class="container" id="container">
     <div id="text-container">
         <div id="text"></div>
     </div>
@@ -71,7 +73,7 @@
 </div>
 
 <br>
-<a href="./clientForm/form.html">Insert a Order</a>
+<a id="link" href="./clientForm/form.html">Insert a Order</a>
 
 
 </body>
