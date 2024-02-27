@@ -32,6 +32,7 @@ class AGV {
 
       document.getElementById("orders").disabled = true;
       document.getElementById("animation").disabled = true;
+      document.getElementById("returnHome").disabled = true;
 
       const step = 1;
       const stepsCount = Math.ceil(distance / step);
@@ -43,9 +44,8 @@ class AGV {
       const moveInterval = setInterval(() => {
         if (stepIndex >= stepsCount) {
           clearInterval(moveInterval);
-
           index++;
-
+          
           if (index < final.length) {
             animateNode();
           }
@@ -53,8 +53,9 @@ class AGV {
           if (final[index - 1].x == home.x && final[index - 1].y == home.y) {
             document.getElementById("orders").disabled = false;
             document.getElementById("animation").disabled = false;
+            document.getElementById("returnHome").disabled = true;
           }
-
+          
           if (final[index] != undefined && final[index] != home) {
             final[index].setReleased(true);
           }
@@ -67,29 +68,33 @@ class AGV {
           element.style.top = startX + "px";
           element.style.left = startY + "px";
           stepIndex++;
-
+          
           const remainingDistance = Math.sqrt(
             (final[index].x - startX) * (final[index].x - startX) +
             (final[index].y - startY) * (final[index].y - startY)
-          ).toFixed(2);
+            ).toFixed(2);
+            
+            if (remainingDistance < step) {
+              clearInterval(moveInterval);
+              index++;
+              
+              if (index < final.length) {
+                animateNode();
+              }else{
+                document.getElementById("returnHome").disabled = false;
+                
+              }
 
-          if (remainingDistance < step) {
-            clearInterval(moveInterval);
-            index++;
+              if (
+                final[index - 1].x == home.x &&
+                final[index - 1].y == home.y
+              ) {
+                document.getElementById("animation").disabled = false;
+                document.getElementById("orders").disabled = false;
+                document.getElementById("returnHome").disabled = true;
+              }
 
-            if (index < final.length) {
-              animateNode();
             }
-
-            if (
-              final[index - 1].x == home.x &&
-              final[index - 1].y == home.y
-            ) {
-              document.getElementById("animation").disabled = false;
-              document.getElementById("orders").disabled = false;
-            }
-
-          }
         }
       }, 8);
     }

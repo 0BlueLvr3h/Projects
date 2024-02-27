@@ -21,7 +21,7 @@ function generateRandomAdjacentMatrix() {
 
     for (let i = 0; i < V; i++) {
         for (let j = i + 1; j < V; j++) {
-            var random_boolean = Math.random() < 0.5;
+            var random_boolean = Math.random() < 0.7;
             if (random_boolean) {
                 matrix[i][j] = matrix[j][i] = Math.floor(Math.random() * 20);
             } else {
@@ -103,6 +103,7 @@ function dijkstra(src, destinationNode) {
 
 var connectedNodes = new Array();
 function traceConnectedNodes() {
+    connectedNodes = new Array();
     for (let i = 0; i < V; i++) {
         for (let j = i + 1; j < V; j++) {
             if (matrix[i][j] !== 0) {
@@ -114,6 +115,7 @@ function traceConnectedNodes() {
             }
         }
     }
+    return connectedNodes;
 }
 
 

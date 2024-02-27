@@ -7,11 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
   var AGVObj;
   var homeNode;
   let manualMode = false;
+  let manualNodes = new Array();
+  var connectedNodes;
+
   document.getElementById("container").style.visibility = "hidden";
   document.getElementById("link").style.visibility = "hidden";
   document.getElementById("animation").style.visibility = "hidden";
   document.getElementById("delOrder").style.visibility = "hidden";
   document.getElementById("updateOrder").style.visibility = "hidden";
+  document.getElementById("returnHome").style.visibility = "hidden";
+
+  document.getElementById("manualDone").style.visibility = "hidden";
 
 
   getRequestOrder()
@@ -28,11 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           document.getElementById("orders").addEventListener("change", () => {
+            connectedNodes = new Array();
             document.getElementById("container").style.visibility = "visible";
             document.getElementById("link").style.visibility = "visible";
             document.getElementById("animation").style.visibility = "visible";
             document.getElementById("delOrder").style.visibility = "visible";
             document.getElementById("updateOrder").style.visibility = "visible";
+            document.getElementById("coords").style.visibility = "visible";
+            document.getElementById("returnHome").style.visibility = "visible";
+
             nodePath = [];
             let orderDiv = document.getElementById("showOrder");
             orderDiv.innerHTML = "";
@@ -44,12 +54,22 @@ document.addEventListener("DOMContentLoaded", () => {
               document.getElementById("container").style.visibility = "hidden";
               document.getElementById("link").style.visibility = "hidden";
               document.getElementById("animation").style.visibility = "hidden";
-              document.getElementById("changeButton").style.visibility = "hidden";
               document.getElementById("delOrder").style.visibility = "hidden";
               document.getElementById("updateOrder").style.visibility = "hidden";
+              document.getElementById("coords").style.visibility = "hidden";
+              document.getElementById("returnHome").style.visibility = "hidden";
+
+              document.getElementById("manualDone").style.visibility = "hidden";
+              manualNodes = [];
 
             } else if (selectedOrder != "Manual Mode") {
+              document.getElementById("returnHome").disabled = true;
+              document.getElementById("manualDone").disabled = true;
+              document.getElementById("animation").disabled = false;
+              document.getElementById("delOrder").disabled = false;
+              document.getElementById("updateOrder").disabled = false;
               manualMode = false;
+              manualNodes = [];
               for (let order of result) {
                 if (order.orderId == selectedOrder) {
                   selectedOrder = order;
@@ -59,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
               }
 
               setV(nodes.length);
+              document.getElementById("start").innerHTML = nodes[0].nodeId.split('_')[1];
               document.getElementById("destinationNode").max = nodes.length;
               generateRandomAdjacentMatrix();
               traceConnectedNodes();
@@ -95,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     node.nodePosition.y,
                     node.released,
                     true
-                  )
+                  );
                   AGVObj = new AGV(crypto.randomUUID, elem, homeNode);
                   nodePath.push(homeNode);
                 } else {
@@ -105,8 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     node.released
                   ));
                 }
-
-              })
+              });
 
               writeNodes(
                 nodePath,
@@ -116,10 +136,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 AGVObj.homePosition
               );
 
-            }else{
+            } else {
+              document.getElementById("animation").disabled = true;
+              document.getElementById("delOrder").disabled = true;
+              document.getElementById("updateOrder").disabled = true;
+              document.getElementById("returnHome").disabled = true;
+
+              document.getElementById("manualDone").disabled = true;
               ctx.clearRect(0, 0, c.width, c.height);
               document.getElementById("nodes").innerHTML = "";
               manualMode = true;
+              document.getElementById("manualDone").style.visibility = "visible";
+              alert("click to draw nodes");
             }
           });
         } catch (err) {
@@ -149,31 +177,37 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("overlay").style.display = "none";
         });
 
-        let manualNodes = new Array();
+        ///////////////manual insert
+
+
         document.getElementById("container").addEventListener("click", (event) => {
           nodePath = [];
+          connectedNodes = new Array();
           if (manualMode) {
             if (event.srcElement.nodeName != "DIV") {
               let node = document.createElement("div");
               node.className = "dots";
               node.style.top = event.offsetY - 10 + "px";
               node.style.left = event.offsetX - 10 + "px";
+              node.style.zIndex = 3;
               node.innerHTML = manualNodes.length + 1;
               document.getElementById("nodes").appendChild(node);
               if (manualNodes.length == 0) {
-                manualNodes.push(new PathNode(manualNodes.length + 1, node.offsetLeft, node.offsetTop, true, true));
+                document.getElementById("manualDone").disabled = false;
+                homeNode = new PathNode(manualNodes.length, node.offsetTop, node.offsetLeft, true, true)
+                manualNodes.push(homeNode);
+                AGVObj = new AGV(crypto.randomUUID, elem, homeNode);
                 document.getElementById("animate").style.top = node.style.top;
                 document.getElementById("animate").style.left = node.style.left;
                 document.getElementById("start").innerHTML = manualNodes.length + "";
               } else {
-                manualNodes.push(new PathNode(manualNodes.length + 1, node.offsetLeft, node.offsetTop, true));
+                manualNodes.push(new PathNode(manualNodes.length, node.offsetTop, node.offsetLeft, true));
               }
               let biggerNode = document.createElement("div");
               biggerNode.className = "biggerDots";
               biggerNode.style.top = (event.offsetY - 20) + "px";
               biggerNode.style.left = (event.offsetX - 20) + "px";
               document.getElementById("nodes").appendChild(biggerNode);
-              console.log(manualNodes);
             }
           }
           setV(manualNodes.length);
@@ -181,12 +215,31 @@ document.addEventListener("DOMContentLoaded", () => {
           nodePath = manualNodes;
         })
 
+        document.getElementById("manualDone").addEventListener("click", (event) => {
+          document.getElementById("animation").disabled = false;
+          document.getElementById("delOrder").disabled = false;
+          document.getElementById("updateOrder").disabled = false;
+          document.getElementById("returnHome").disabled = false;
+          connectedNodes = new Array();
+          generateRandomAdjacentMatrix();
+          connectedNodes = traceConnectedNodes();
+          drawStrokes(connectedNodes, manualNodes, ctx);
+          event.target.style.visibility = "hidden";
+          manualMode = false;
+        })
+
+        //////////////////////////////
 
         var finalPath = new Array();
         document.getElementById("animation").addEventListener("click", () => {
           finalPath = [];
           var homeNodeIndex;
           var finalDestinationNumbers = dijkstra(homeNode.index, document.getElementById("destinationNode").value);
+
+
+          if (finalDestinationNumbers.length == 0) {
+            alert("node " + document.getElementById("destinationNode").value + " is not linked to source/the source is the same as destination");
+          }
 
           for (number of finalDestinationNumbers) {
             nodePath.forEach((node, i) => {
@@ -196,19 +249,23 @@ document.addEventListener("DOMContentLoaded", () => {
             })
           }
 
-          nodePath.forEach(function (node, i) {
+
+          AGVObj.move(finalPath);
+        });
+
+        document.getElementById("returnHome").addEventListener("click", () => {
+          finalPath = finalPath.slice().reverse();
+
+          nodePath.forEach((node, i) => {
             if (node.isThisNodeHome()) {
               homeNodeIndex = i;
               finalPath.push(node);
             }
-          });
+          })
 
-          console.log(finalPath);
-          AGVObj.move(finalPath)
-        });
+          AGVObj.move(finalPath);
+        })
+
       }
     );
-
-
-
 });

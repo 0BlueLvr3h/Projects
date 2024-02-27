@@ -1,10 +1,7 @@
 
-function collisionDetector(x, y, allNodes) {
-    allNodes.forEach(function (node, i) {
-
-    })
+function collisionDetector(node1,node2) {
+    
 }
-
 
 function isOverlapX(x, nodes) {
     for (let i = 0; i < nodes.length; i++) {
@@ -18,7 +15,6 @@ function isOverlapX(x, nodes) {
     return false;
 }
 
-
 function isOverlapY(y, nodes) {
     for (let i = 0; i < nodes.length; i++) {
         let otherNode = nodes[i];
@@ -27,16 +23,16 @@ function isOverlapY(y, nodes) {
             return true;
         }
     }
-
     return false;
 }
+
 function drawStrokes(nodesToConnect, path, ctx) {
     ctx.clearRect(0, 0, document.getElementById("canvas").width, document.getElementById("canvas").height);
     var finalNodes;
     ctx.strokeStyle = "red";
 
     finalNodes = nodesToConnect.map(nodesArray =>
-        nodesArray.map(nodeIndex => path.find(node => node.index=== nodeIndex))
+        nodesArray.map(nodeIndex => path.find(node => node.index === nodeIndex))
     );
 
     finalNodes.forEach(nodesArray => {
@@ -53,28 +49,16 @@ function drawStrokes(nodesToConnect, path, ctx) {
 }
 
 
-
 function writeNodes(nodePath, nodeCoordPair, elem, ctx) {
-
     document.getElementById("nodes").innerHTML = "";
-
-
-    //coppie di nodi da connettere
-    console.log(connectedNodes);
-    //coppie di nodi da connettere
-
     console.log("nodePath ", nodePath);
-
-
     nodePath.forEach(function (node, i) {
         nodeCoordPair.push(node);
-
         var biggerNode = document.createElement("div");
         biggerNode.className = "biggerDots";
         biggerNode.style.top = (node.x - 10) + "px";
         biggerNode.style.left = (node.y - 10) + "px";
         document.getElementById("nodes").appendChild(biggerNode);
-
 
         var nodeToAdd = document.createElement("div");
         nodeToAdd.className = "dots";
@@ -84,7 +68,7 @@ function writeNodes(nodePath, nodeCoordPair, elem, ctx) {
             elem.style.top = node.x + "px";
             elem.style.left = node.y + "px";
             nodeToAdd.innerHTML = "H";
-            nodePath.push(node);
+            //nodePath.push(node);
             if (node.getIndex() - 1 == 0) {
                 document.getElementById("start").innerHTML = "";
                 var startNode = document.createTextNode("" + V)
@@ -93,12 +77,9 @@ function writeNodes(nodePath, nodeCoordPair, elem, ctx) {
         } else {
             nodeToAdd.innerHTML = i + 1;
         }
-
         nodeToAdd.style.zIndex = 3;
         document.getElementById("nodes").appendChild(nodeToAdd);
-        
     });
     drawStrokes(connectedNodes, nodePath, ctx);
     connectedNodes = [];
-    
 }
