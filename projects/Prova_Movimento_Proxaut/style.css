@@ -1,4 +1,13 @@
-#overlay >* {
+#leave{
+  position: relative !important;
+  right: 0 !important;
+  width: 50px;
+  margin: auto;
+  cursor: pointer;
+}
+
+
+#overlay>* {
   * {
     justify-content: center;
     text-align: center;
@@ -10,32 +19,32 @@
     height: 100%;
   }
 
-  #textarea {
+  textarea {
     text-align: left !important;
-    font-size: 15px !important; 
+    font-size: 15px !important;
+    border: 2px solid black !important;
     resize: none;
     width: 350px;
     height: 600px;
     border-radius: 10px;
-    border: 2px solid black;
   }
-  
+
   #orderIdButtonJson {
-    font-size: 20px !important; 
+    font-size: 20px !important;
     margin: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 10px;
   }
 
-  #orderIdButtonJson:hover{
+  #orderIdButtonJson:hover {
     background-color: #737980;
   }
 
   /*Background color*/
   #grad1 {
     background-color: #9C27B0;
-    background-image: linear-gradient(120deg, #FF4081, #81D4FA);
+    background-image: linear-gradient(120deg, #405dff, #81D4FA);
   }
 
   /*form styles*/
@@ -173,6 +182,7 @@
     margin-bottom: 10px;
     font-weight: bold;
     text-align: left;
+    text-align: center;
   }
 
   /*progressbar*/
@@ -247,6 +257,18 @@
     background: skyblue;
   }
 
+  input {
+    border: 1px solid black;
+  }
+
+  input[type=number] {
+    width: 70px !important;
+  }
+
+  input#loadId {
+    width: 580px !important;
+  }
+
   /*Imaged Radio Buttons*/
   .radio-group {
     position: relative;
@@ -280,25 +302,35 @@
   }
 }
 
-#overlay {
+#orderButton {
+  cursor: pointer;
+}
+
+#loadButton {
+  cursor: pointer;
+}
+
+#loadButton:hover,
+#unload:hover {
+  background-color: #a5abb1;
+}
+
+
+#unload {
+  cursor: pointer;
+}
+
+.overlay {
   position: fixed;
-  /* Sit on top of the page content */
   display: none;
-  /* Hidden by default */
   width: 100%;
-  /* Full width (cover the whole page) */
   height: 100%;
-  /* Full height (cover the whole page) */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Black background with opacity */
   z-index: 10;
-  /* Specify a stack order in case you're using a different order for other elements */
-  cursor: pointer;
-  /* Add a pointer on hover */
 }
 
 .container {
@@ -317,23 +349,43 @@
   position: absolute;
   border: 1px solid black;
   z-index: 5;
-
-  /* Applica rotazione */
   transform-origin: center;
+
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 7px 5px 0;
+    border-color: transparent black transparent transparent;
+    transform: translateY(-50%);
+    top: 50%;
+    left: calc(15%);
+  }
+
+  &::after {
+    display: none;
+  }
+
+  &.no-after::after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px 5px 3px 0;
+    border-color: white;
+    transform: translateY(-50%);
+    top: 49%;
+    left: calc(55%);
+  }
 }
 
-#animate::before {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 5px 7px 5px 0;
-  border-color: transparent black transparent transparent;
-  transform: translateY(-50%);
-  top: 50%;
-  left: calc(20%); /* Posiziona la freccia lateralmente in base alla dimensione dell'elemento */
-}
+
+
 
 
 .dots {
@@ -346,6 +398,7 @@
   background-color: rgb(0, 0, 0);
   z-index: 0;
   border: 0.25px solid white;
+  cursor: pointer;
 }
 
 .biggerDots {

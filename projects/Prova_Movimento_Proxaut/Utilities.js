@@ -26,6 +26,15 @@ function isOverlapY(y, nodes) {
     return false;
 }
 
+function toggleDisplay(elementId) {
+    var x = document.getElementById(elementId);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
 function drawStrokes(nodesToConnect, path, ctx) {
     ctx.clearRect(0, 0, document.getElementById("canvas").width, document.getElementById("canvas").height);
     var finalNodes;

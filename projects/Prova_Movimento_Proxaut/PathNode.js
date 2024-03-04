@@ -36,5 +36,13 @@ class PathNode {
         return this.isReleased;
     }
 
+    setLoad(load){
+        this.load = load;
+    }
+
+    deleteLoad(){
+        this.load = "";
+    }
+
 
 }

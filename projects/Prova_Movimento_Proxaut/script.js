@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let manualNodes = new Array();
   var connectedNodes;
 
+
+  document.getElementById("load").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
   document.getElementById("container").style.visibility = "hidden";
   document.getElementById("link").style.visibility = "hidden";
   document.getElementById("animation").style.visibility = "hidden";
@@ -166,6 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("updateOrder").addEventListener("click", () => {
           document.getElementById("overlay").style.display = "block";
+          document.getElementById("order").style.display = "block";
+          
 
         })
 
@@ -177,8 +182,46 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("overlay").style.display = "none";
         });
 
-        ///////////////manual insert
+        document.getElementById("loadButton").addEventListener("click", () => {
+          if (document.getElementById("loadId").value != "") {
+            document.getElementById("load").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+            elem.classList.add("no-after");
+            let size = new Size(document.getElementById("loadLength").value, document.getElementById("loadHeight").value, document.getElementById("loadDepth").value);
+            let loadToAdd = new Load(document.getElementById("loadId").value, 
+                                      document.getElementById("loadType").value, 
+                                      document.getElementById("loadWeight").value,
+                                      size,
+                                      document.getElementById("loadMaterial").value
+                                      );
+            AGVObj.addLoad(loadToAdd);
+            console.log(AGVObj);
+          }else{
+            alert("Cannot be blank");
+          }
+        });
 
+        document.getElementById("randomId").addEventListener("click", () => {
+          document.getElementById("loadId").value = "";
+          document.getElementById("loadId").value = crypto.randomUUID();
+        });
+
+        document.getElementById("unload").addEventListener("click", () => {
+          document.getElementById("load").style.display = "none";
+          document.getElementById("overlay").style.display = "none";
+          AGVObj.unload();
+          console.log(AGVObj);
+          elem.classList.remove("no-after");
+          document.getElementById("loadId").value = "";
+        });
+        
+        document.getElementById("leave").addEventListener("click", () => {
+          document.getElementById("load").style.display = "none";
+          document.getElementById("overlay").style.display = "none";
+          document.getElementById("loadId").value = "";
+        });
+
+        ///////////////manual insert
 
         document.getElementById("container").addEventListener("click", (event) => {
           nodePath = [];
@@ -205,15 +248,20 @@ document.addEventListener("DOMContentLoaded", () => {
               }
               let biggerNode = document.createElement("div");
               biggerNode.className = "biggerDots";
+              biggerNode.style.zIndex = 2;
               biggerNode.style.top = (event.offsetY - 20) + "px";
               biggerNode.style.left = (event.offsetX - 20) + "px";
               document.getElementById("nodes").appendChild(biggerNode);
             }
+          } else if (event.target.className == "dots") {
+            console.log();
           }
+
           setV(manualNodes.length);
           document.getElementById("destinationNode").max = manualNodes.length;
           nodePath = manualNodes;
         })
+
 
         document.getElementById("manualDone").addEventListener("click", (event) => {
           document.getElementById("animation").disabled = false;
@@ -227,7 +275,6 @@ document.addEventListener("DOMContentLoaded", () => {
           event.target.style.visibility = "hidden";
           manualMode = false;
         })
-
         //////////////////////////////
 
         var finalPath = new Array();

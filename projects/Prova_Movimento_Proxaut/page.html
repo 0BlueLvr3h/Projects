@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+
     <link rel="stylesheet" href="style.css">
     <script src="Utilities.js" defer></script>
     <script src="script.js" defer></script>
@@ -15,38 +16,99 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js"></script>
     <script src="./clientForm/Order/Connection.js"></script>
     <script src="./clientForm/isJsonClass.js"></script>
+    <script src="Size.js"></script>
+    <script src="Load.js"></script>
 </head>
 
 
 <body id="body">
 
 
-<p style="display: inline;">Home Node: <div style="display: inline;" id="start"></div></p>
-<p>Destination Node: <input id="destinationNode" type="number" value="1" min="1"></p>
+    <p style="display: inline;">Home Node:
+    <div style="display: inline;" id="start"></div>
+    </p>
+    <p>Destination Node: <input id="destinationNode" type="number" value="1" min="1"></p>
 
-<select id="orders" style="text-align: center;">
-    <option value="">Select Order</option>
-    <option value="Manual Mode">Manual Mode</option>
+    <select id="orders" style="text-align: center;">
+        <option value="">Select Order</option>
+        <option value="Manual Mode">Manual Mode</option>
 
-</select>
-<input type="button" id="delOrder" value="Delete Order">
-<input type="button" id="updateOrder" value="Update Order">
+    </select>
+    <input type="button" id="delOrder" value="Delete Order">
+    <input type="button" id="updateOrder" value="Update Order">
 
-<div id="overlay" class="bootstrap-iso">
-    <div class="container-fluid" id="grad1">
-        <div class="row justify-content-center mt-0">
-            <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                    <h2><strong>Order Compiler ( by json )</strong></h2>
-                    <div class="row">
-                        <div class="col-md-12 mx-0">
-                            <fieldset>
-                                <textarea id="textarea" cols="30" rows="10"></textarea><br>
-                                <input type="button" id="orderButton" class="action-button" value="  Finish  " />
-                                
-                                <br>
-                                <br>
-                            </fieldset>
+    <div id="overlay" class="bootstrap-iso overlay">
+        <div class="container-fluid" id="grad1">
+            <div class="row justify-content-center mt-0">
+                <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3" id="order">
+                        <h2><strong>Order Compiler ( by json )</strong></h2>
+                        <div class="row">
+                            <div class="col-md-12 mx-0">
+                                <fieldset>
+                                    <textarea id="textarea" cols="30" rows="10"></textarea><br>
+                                    <input type="button" id="orderButton" class="action-button" value="  Finish  " />
+
+                                    <br>
+                                    <br>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3" id="load">
+                        <h2><strong>Load Creator</strong></h2>
+                        <div class="row">
+                            <div class="container-fluid" id="grad1">
+                                <div class="row justify-content-center mt-0">
+                                    <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+                                        <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                                            <div class="col-md-12 mx-0">
+                                                <div id="leave">&#x2716;</div>
+                                                <fieldset>
+                                                    <div class="form-card" id="action">
+                                                        <h2 class="fs-title">Insert Load Informations</h2>
+                                                        <form action="" class="">
+                                                            <label class="pay">Id</label>
+                                                            <input type="text" id="loadId" placeholder=""
+                                                                class="form-control">
+                                                            <input type="button" id="randomId" class="btn btn-primary "
+                                                                value="Generate Random Id">
+                                                            <br>
+                                                            <br>
+                                                            <label class="pay">&zwnj; &zwnj; &zwnj; &zwnj; Type</label>
+                                                            <input type="text" class="" id="loadType" placeholder="">
+                                                            <br>
+                                                            <br>
+                                                            <label class="pay">Weight</label>
+                                                            <input type="number" class="pay" id="loadWeight">
+                                                            Kg
+                                                            <br>
+                                                            <br>
+                                                            <label class="pay">&zwnj; &zwnj; &zwnj; &zwnj; &zwnj;&zwnj;
+                                                                Size</label>
+                                                            <input type="number" class="pay" id="loadLength"> x
+                                                            <input type="number" class="pay" id="loadHeight"> x
+                                                            <input type="number" class="pay" id="loadDepth"> cm
+                                                            <br>
+                                                            <br>
+                                                            <label class="pay">Material</label>
+                                                            <input type="text" class="pay" id="loadMaterial">
+                                                            <br>
+                                                            <br>
+                                                            <input type="button" id="loadButton" class="action-button"
+                                                                value="  Load  " />
+                                                            <input type="button" id="unload" class="action-button"
+                                                                value="  Unload  " />
+                                                        </form>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,29 +116,32 @@
         </div>
     </div>
 
-</div>
 
-<div id="showOrder">
 
-</div>
+    <div id="showOrder">
 
-<p><button id="animation">Calculate</button></p> 
-<p><button id="returnHome">Return Home</button></p> 
-<p><button id="manualDone">Done</button></p> 
-<div id="coords"></div>
-
-<div class="container" id="container">
-    <div id="text-container">
-        <div id="text"></div>
     </div>
-    <div id="animate"></div>
-    <div id="nodes"></div>
-    <canvas id="canvas" height="400" width="800"></canvas>
-</div>
+    <p><button id="animation">Calculate</button></p>
+    <p><button id="returnHome">Return Home</button></p>
+    <div id="buttons">
+        <p></p>
+    </div>
+    <p><button id="manualDone">Done</button></p>
+    <div id="coords"></div>
 
-<br>
-<a id="link" href="./clientForm/form.html">Insert a Order</a>
+    <div class="container" id="container">
+        <div id="text-container">
+            <div id="text"></div>
+        </div>
+        <div id="animate"></div>
+        <div id="nodes"></div>
+        <canvas id="canvas" height="400" width="800"></canvas>
+    </div>
+
+    <br>
+    <a id="link" href="./clientForm/form.html">Insert a Order</a>
 
 
 </body>
+
 </html>
