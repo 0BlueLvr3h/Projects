@@ -1,4 +1,18 @@
-#leave{
+body {
+  background-color: #302f2f;
+  color: #ccc;
+  text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
+    1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
+}
+
+button,
+select,
+input[type="number"],
+input {
+  border-radius: 5px;
+}
+
+#leave {
   position: relative !important;
   right: 0 !important;
   width: 50px;
@@ -41,13 +55,11 @@
     background-color: #737980;
   }
 
-  /*Background color*/
   #grad1 {
     background-color: #9C27B0;
     background-image: linear-gradient(120deg, #405dff, #81D4FA);
   }
 
-  /*form styles*/
   #msform {
     text-align: center;
     position: relative;
@@ -63,8 +75,6 @@
     box-sizing: border-box;
     width: 94%;
     margin: 0 3% 20px 3%;
-
-    /*stacking fieldsets above each other*/
     position: relative;
   }
 
@@ -76,12 +86,9 @@
     width: 100%;
     margin: 0;
     padding-bottom: 20px;
-
-    /*stacking fieldsets above each other*/
     position: relative;
   }
 
-  /*Hide all except first fieldset*/
   #msform fieldset:not(:first-of-type) {
     display: none;
   }
@@ -118,7 +125,7 @@
     outline-width: 0;
   }
 
-  /*Blue Buttons*/
+
   #msform .action-button {
     width: 100px;
     background: skyblue;
@@ -136,7 +143,7 @@
     box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
   }
 
-  /*Previous Buttons*/
+
   #msform .action-button-previous {
     width: 100px;
     background: #616161;
@@ -154,7 +161,6 @@
     box-shadow: 0 0 0 2px white, 0 0 0 3px #616161;
   }
 
-  /*Dropdown List Exp Date*/
   select.list-dt {
     border: none;
     outline: 0;
@@ -167,7 +173,7 @@
     border-bottom: 2px solid skyblue;
   }
 
-  /*The background card*/
+
   .card {
     z-index: 0;
     border: none;
@@ -175,7 +181,7 @@
     position: relative;
   }
 
-  /*FieldSet headings*/
+
   .fs-title {
     font-size: 25px;
     color: #2C3E50;
@@ -185,7 +191,7 @@
     text-align: center;
   }
 
-  /*progressbar*/
+
   #progressbar {
     margin-bottom: 30px;
     overflow: hidden;
@@ -204,7 +210,7 @@
     position: relative;
   }
 
-  /*Icons in the ProgressBar*/
+
   #progressbar #account:before {
     font-family: FontAwesome;
     content: "\f023";
@@ -225,7 +231,7 @@
     content: "\f00c";
   }
 
-  /*ProgressBar before any progress*/
+
   #progressbar li:before {
     width: 50px;
     height: 50px;
@@ -239,7 +245,7 @@
     padding: 2px;
   }
 
-  /*ProgressBar connectors*/
+
   #progressbar li:after {
     content: '';
     width: 100%;
@@ -251,7 +257,7 @@
     z-index: -1;
   }
 
-  /*Color number of the step and the connector before it*/
+
   #progressbar li.active:before,
   #progressbar li.active:after {
     background: skyblue;
@@ -269,7 +275,7 @@
     width: 580px !important;
   }
 
-  /*Imaged Radio Buttons*/
+
   .radio-group {
     position: relative;
     margin-bottom: 25px;
@@ -295,7 +301,7 @@
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
   }
 
-  /*Fit image in bootstrap div*/
+
   .fit-image {
     width: 100%;
     object-fit: cover;
@@ -337,14 +343,14 @@
   width: 800px;
   height: 400px;
   position: relative;
-  background: rgb(65, 140, 202);
+  background: #A1D6E2;
   border: 2px solid black;
 }
 
 #animate {
   width: 20px;
   height: 20px;
-  background-color: red;
+  background-color: #1995AD;
   border-radius: 100%;
   position: absolute;
   border: 1px solid black;
@@ -377,7 +383,7 @@
     height: 0;
     border-style: solid;
     border-width: 3px 5px 3px 0;
-    border-color: white;
+    border-color: #F1F1F2;
     transform: translateY(-50%);
     top: 49%;
     left: calc(55%);
@@ -417,7 +423,7 @@
 canvas {
   z-index: 2;
   position: absolute;
-  border: 2px solid red;
+  border: 2px solid #1995AD;
   left: -2px;
   top: -2px;
 }

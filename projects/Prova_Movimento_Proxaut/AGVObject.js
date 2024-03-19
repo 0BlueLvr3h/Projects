@@ -1,3 +1,5 @@
+
+
 class AGV {
   constructor(uuid, graphicElement, homePosition) {
     this.uuid = uuid;
@@ -11,8 +13,8 @@ class AGV {
     this.load = "";
   }
   
-  addLoad(loadToadd) {
-    this.load = loadToadd;
+  addLoad(loadToAdd) {
+    this.load = loadToAdd;
   }
 
   unload() {

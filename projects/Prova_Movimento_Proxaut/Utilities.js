@@ -1,6 +1,6 @@
 
-function collisionDetector(node1,node2) {
-    
+function collisionDetector(node1, node2) {
+
 }
 
 function isOverlapX(x, nodes) {
@@ -29,16 +29,16 @@ function isOverlapY(y, nodes) {
 function toggleDisplay(elementId) {
     var x = document.getElementById(elementId);
     if (x.style.display === "none") {
-      x.style.display = "block";
+        x.style.display = "block";
     } else {
-      x.style.display = "none";
+        x.style.display = "none";
     }
-  }
+}
 
 function drawStrokes(nodesToConnect, path, ctx) {
     ctx.clearRect(0, 0, document.getElementById("canvas").width, document.getElementById("canvas").height);
     var finalNodes;
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = "#F1F1F2";
 
     finalNodes = nodesToConnect.map(nodesArray =>
         nodesArray.map(nodeIndex => path.find(node => node.index === nodeIndex))
@@ -91,4 +91,21 @@ function writeNodes(nodePath, nodeCoordPair, elem, ctx) {
     });
     drawStrokes(connectedNodes, nodePath, ctx);
     connectedNodes = [];
+}
+
+
+function loadCookies() {
+    if (document.cookie.includes("currentOrder")) {
+        currentOrder = document.cookie.valueOf("currentOrder");
+        currentOrder = currentOrder.split("=")[1];
+        currentOrder = currentOrder.slice(1, currentOrder.length - 1);
+        console.log(currentOrder);
+        try {
+            document.getElementById(currentOrder).selected = true;
+            let event = new Event("change");
+            document.getElementById("orders").dispatchEvent(event);
+        } catch (error) {
+            alert("order " + currentOrder + " does not exist");
+        }
+    }
 }

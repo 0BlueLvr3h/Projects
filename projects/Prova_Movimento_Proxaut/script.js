@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-
   let nodePath = new Array();
   const c = document.getElementById("canvas");
   const ctx = c.getContext("2d");
@@ -9,6 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let manualMode = false;
   let manualNodes = new Array();
   var connectedNodes;
+  let currentOrder;
+  let reload = false;
+
+
 
 
   document.getElementById("load").style.display = "none";
@@ -33,8 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
             let optionEl = document.createElement("option");
             optionEl.textContent = "" + order.orderId;
             optionEl.value = order.orderId;
+            optionEl.id = order.orderId;
             document.getElementById("orders").appendChild(optionEl);
           }
+
+
 
           document.getElementById("orders").addEventListener("change", () => {
             connectedNodes = new Array();
@@ -75,7 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
               manualNodes = [];
               for (let order of result) {
                 if (order.orderId == selectedOrder) {
+                  let date = new Date(Date.now());
+                  let newDateObj = new Date(date.getTime() + 30 * 60000);
+                  document.cookie = "currentOrder=" + JSON.stringify(order.orderId) + "; expires=" + newDateObj;
                   selectedOrder = order;
+                  currentOrder = order;
                   nodes = order.nodes;
                   edges = order.edges;
                 }
@@ -155,7 +165,20 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         } catch (err) {
           console.log("Error: no orders in db");
+          console.log(err);
         }
+
+        loadCookies();
+
+        document.addEventListener("keydown", (event) => {
+          if (event.keyCode == 13) {
+            console.log("ciao");
+            document.getElementById("animation").click();
+            if(!document.getElementById("returnHome").disabled){
+              document.getElementById("returnHome").click();
+            }
+          }
+        })
 
         document.getElementById("container").addEventListener("mousemove", (event) => {
           document.getElementById("coords").innerHTML = "X:" + ((event.offsetY) - 10) + "   Y:" + ((event.offsetX) - 10)
@@ -163,23 +186,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         document.getElementById("delOrder").addEventListener("click", () => {
-          deleteRequestOrder(document.getElementById("orders").value);
-          location.reload();
+          if (document.getElementById("orders").value != "Manual Mode") {
+            deleteRequestOrder(document.getElementById("orders").value);
+            location.reload();
+          }
         })
 
         document.getElementById("updateOrder").addEventListener("click", () => {
-          document.getElementById("overlay").style.display = "block";
-          document.getElementById("order").style.display = "block";
-          
-
+          if (document.getElementById("orders").value != "Manual Mode") {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("order").style.display = "block";
+            document.getElementById("textarea").value = JSON.stringify(currentOrder, null, 4);
+            document.getElementById("textarea").style.width = 500 + "px";
+          }
         })
 
         document.getElementById("orderButton").addEventListener("click", () => {
-          if (isJsonString(document.getElementById("textarea").value)) {
-            putRequestOrder(document.getElementById("textarea").value, document.getElementById("orders").value);
-            location.reload();
+          if (document.getElementById("orders").value != "Manual Mode") {
+            if (isJsonString(document.getElementById("textarea").value)) {
+              putRequestOrder(document.getElementById("textarea").value, document.getElementById("orders").value);
+              location.reload();
+            }
+            document.getElementById("overlay").style.display = "none";
           }
-          document.getElementById("overlay").style.display = "none";
         });
 
         document.getElementById("loadButton").addEventListener("click", () => {
@@ -188,15 +217,15 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("overlay").style.display = "none";
             elem.classList.add("no-after");
             let size = new Size(document.getElementById("loadLength").value, document.getElementById("loadHeight").value, document.getElementById("loadDepth").value);
-            let loadToAdd = new Load(document.getElementById("loadId").value, 
-                                      document.getElementById("loadType").value, 
-                                      document.getElementById("loadWeight").value,
-                                      size,
-                                      document.getElementById("loadMaterial").value
-                                      );
+            let loadToAdd = new Load(document.getElementById("loadId").value,
+              document.getElementById("loadType").value,
+              document.getElementById("loadWeight").value,
+              size,
+              document.getElementById("loadMaterial").value
+            );
             AGVObj.addLoad(loadToAdd);
             console.log(AGVObj);
-          }else{
+          } else {
             alert("Cannot be blank");
           }
         });
@@ -212,13 +241,27 @@ document.addEventListener("DOMContentLoaded", () => {
           AGVObj.unload();
           console.log(AGVObj);
           elem.classList.remove("no-after");
+
           document.getElementById("loadId").value = "";
+          document.getElementById("loadType").value = "";
+          document.getElementById("loadWeight").value = "";
+          document.getElementById("loadMaterial").value = "";
+          document.getElementById("loadLength").value = "";
+          document.getElementById("loadHeight").value = "";
+          document.getElementById("loadDepth").value = "";
         });
-        
+
         document.getElementById("leave").addEventListener("click", () => {
           document.getElementById("load").style.display = "none";
           document.getElementById("overlay").style.display = "none";
+
           document.getElementById("loadId").value = "";
+          document.getElementById("loadType").value = "";
+          document.getElementById("loadWeight").value = "";
+          document.getElementById("loadMaterial").value = "";
+          document.getElementById("loadLength").value = "";
+          document.getElementById("loadHeight").value = "";
+          document.getElementById("loadDepth").value = "";
         });
 
         ///////////////manual insert
@@ -262,8 +305,9 @@ document.addEventListener("DOMContentLoaded", () => {
           nodePath = manualNodes;
         })
 
-
         document.getElementById("manualDone").addEventListener("click", (event) => {
+
+
           document.getElementById("animation").disabled = false;
           document.getElementById("delOrder").disabled = false;
           document.getElementById("updateOrder").disabled = false;

@@ -72,7 +72,7 @@ $(document).ready(function () {
     document.getElementById("orderUpdateId").addEventListener("change", () => {
         orderUpdateId = document.getElementById("orderUpdateId");
         if (!checkIfBlank(orderUpdateId)) {
-            alert("inserted");
+            alert("added");
             document.getElementById("orderIdButton").disabled = false;
         } else {
             alert("cannot be blank");

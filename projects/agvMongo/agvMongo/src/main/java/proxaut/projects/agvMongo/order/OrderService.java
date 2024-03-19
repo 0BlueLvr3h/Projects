@@ -1,9 +1,8 @@
 package proxaut.projects.agvMongo.order;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +40,9 @@ public class OrderService {
             throw new IllegalStateException("order with id: " + id + "does not exists");
         }
         orderRepository.deleteById(id);
+    }
+
+    public void deleteAllOrder() {
+        orderRepository.deleteAll();
     }
 }

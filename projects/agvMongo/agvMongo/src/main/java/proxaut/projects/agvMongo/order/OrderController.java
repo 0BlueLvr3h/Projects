@@ -3,12 +3,11 @@ package proxaut.projects.agvMongo.order;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.util.List;
 
-@RestController
-@RequestMapping("api/v1/order")
 @AllArgsConstructor
+@RequestMapping("api/v1/order")
+@RestController
 public class OrderController {
     private final OrderService orderService;
 
@@ -22,7 +21,7 @@ public class OrderController {
     @CrossOrigin
     public String addNewOrder(@RequestBody Order order){
         orderService.addNewOrder(order);
-        return "Done";
+        return "Order " + order + " added";
     }
 
     @PutMapping(path = "{oldOrderId}")
@@ -35,6 +34,13 @@ public class OrderController {
     @CrossOrigin
     public String deleteOrder(@PathVariable("orderId") String id){
         orderService.deleteOrderById(id);
+        return "Done";
+    }
+
+    @DeleteMapping
+    @CrossOrigin
+    public String deleteAllOrders(){
+        orderService.deleteAllOrder();
         return "Done";
     }
 
